@@ -1,7 +1,8 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,13 +10,14 @@ import { AppComponent } from './app.component';
 // import angular envirotment variables
 import { environment } from '../environments/environment';
 
+// import angular backend services
 import { Configuration } from './shared/backend';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://192.168.1.55:8080/auth',
+        url: environment.basePathAuth,
         realm: 'stock-manager',
         clientId: 'stock-manager',
       },
@@ -33,8 +35,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    KeycloakAngularModule,
-    HttpClientModule
+    HttpClientModule,
+    KeycloakAngularModule
   ],
   providers: [
     {
