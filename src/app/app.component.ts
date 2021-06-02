@@ -14,7 +14,7 @@ export class AppComponent {
   public warehouses: WarehouseReq[] = [];
 
   constructor(private warehouseControllerService: WarehouseControllerService) {
-    this.warehouseControllerService.findAll2()
+    this.warehouseControllerService.findAllWarehouse()
     .subscribe((warehouses: any) => {
       this.warehouses = warehouses;
 
